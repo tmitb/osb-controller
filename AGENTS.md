@@ -7,7 +7,7 @@
 │   ├─ 3d-models/  # STL / PNG files for the shell
 │   └─ ble-gamepad/ble-gamepad.ino  # ESP32‑C3 firmware
 ├─ images/          # Photos used in documentation
-└─ software/        # Python OBS controller C# application
+└─ software/        # OBS controller C# application
 ```
 Source code lives under `software/`; tests (if added) should mirror this layout.
 
