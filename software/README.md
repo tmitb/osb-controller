@@ -30,7 +30,7 @@ The README below explains how to build, configure and run the software on a Wind
 ### 1. Clone the repository
 
 ```powershell
-git clone https://github.com/tmitb/ble-obs-controller.git
+git clone https://github.com/tmitb/obs-controller.git
 cd ble-obs-controller
 ```
 
@@ -71,6 +71,7 @@ The resulting `ObsController.exe` will be placed in the publish folder.
 ```
 
 * **`deviceIdentifier`** – the id reported by Windows for the BLE gamepad. When you first run the app it prints a list of detected controllers; copy the `Id` value that matches your hardware. If not sure, try each one of them until you find the one you want.
+* **password** - is not required if OBS is setup to work without authentication.
 * **Button map keys** are *zero‑based indices* as defined by the controller firmware. Windows test app is using 1 based button scheme so you may see the numbers differ by 1.
 * Supported actions (as of today) are:
   * `StartStreaming`
@@ -89,14 +90,16 @@ You can extend the JSON schema to add more actions by editing `ObsController/Mod
 ## Running the controller
 
 ```powershell
-# From the project root (or wherever ObsController.exe lives)
-.\ObsController\bin\Release\net8.0-windows\ObsController.exe \
+# From wherever ObsController.exe lives and use mapping
+.\ObsController.exe
+# or override some settings in mappings.
+.\ObsController.exe 
     --host localhost \
     --port 4455 \
     --password "mySecret"
 ```
 
-All three command‑line options are *optional* – if omitted the values from `mapping.json` are used. The program will:
+All three command‑line options are *optional* and I only really tested the application using mapping.json file. – if omitted the values from `mapping.json` are used. The program will:
 
 1. Load `mapping.json`.
 2. Connect to OBS via WebSocket.
@@ -108,7 +111,7 @@ All three command‑line options are *optional* – if omitted the values from `
 
 ## Building a Windows executable (optional)
 
-If you want a portable single‑file binary you can use `dotnet publish` as shown earlier, or the classic *PyInstaller* approach from the original Python project is no longer needed because this implementation ships as a native .NET app.
+If you want a portable single‑file binary you can use `dotnet publish` as shown earlier.
 
 ---
 
