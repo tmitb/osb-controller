@@ -85,4 +85,6 @@ There are several goals and requirements for this section:
 ### POC
 The current software section has the POC code using C# and .Net 8. I have done some testing using another game controller that is not my own to understand how it must be coded. I was successful at changing the OBS scene using a button press.
 
-The current code base has more code than what I have tested and my not work. There are still more to do to make it work with what I have. My inner software engineer made me to push it to be more generic than necessary... I do not know where I should stop. It is partially because of the fact that I am doing the coding mostly using AI, because it is too easy to keep going.
+The current code base has more code than what I have tested and may not work. There are still more to do to make it work with what I have. My inner software engineer made me to push it to be more generic than necessary... I do not know where I should stop. It is partially because of the fact that I am doing the coding mostly using AI, because it is too easy to keep going.
+
+At this point, the software is functional to meet my own requeirments. You can see the details of the software in [softare/README.md](./README.md) file.
