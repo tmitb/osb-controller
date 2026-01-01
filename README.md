@@ -78,13 +78,30 @@ To test the gamepad, open the built‑in Windows “Game Controllers” app (sea
 In the test dialog, the second tab displays the status of each control. Press the switches to see their corresponding circles light up. As mentioned earlier, the software reports 11 buttons to take advantage of all available pins, but only ten are wired so the product looks tidier. I plan to reuse the Arduino code in the future to support all 11 buttons.
 
 ## Software
-There are several goals and requirements for this section:
+There are several goals, requirements, and highlights for this section:
 - Controlling OBS using a gamepad
 - The software will be built mostly using AI code agents (Vibe Coding)
-
-### POC
-The current software section has the POC code using C# and .Net 8. I have done some testing using another game controller that is not my own to understand how it must be coded. I was successful at changing the OBS scene using a button press.
-
-The current code base has more code than what I have tested and may not work. There are still more to do to make it work with what I have. My inner software engineer made me to push it to be more generic than necessary... I do not know where I should stop. It is partially because of the fact that I am doing the coding mostly using AI, because it is too easy to keep going.
-
+  - Most of the code was built by AI using gpt-oss-120b local model.
+  - It took about 12 hours of total time to build it. Of 12 hours, about 4 hours of work was done by me for both manual coding and interactions with AI.
+  - about 4 hours was spent on the python prototype which failed miserably due to insufficient supporst for the gamepads that are not XInput compatible.
+ 
 At this point, the software is functional to meet my own requeirments. You can see the details of the software in [software/README.md](./software/README.md) file.
+
+### Tech notes
+The current software section has the code using C# and .Net 8. This was my first choice for this project when it was started, but AI guided me to python prototype initially. As mentioned above, that experiment failed for the said reason, and eventually I decided to come back to this.
+
+I have done some testing using another game controller that is not my own to understand how it must be coded. I was successful at changing the OBS scene using a button press. One thing I have noticed that the Windows SDK exposes anything it does not know(put it differently, something that is not XInput compatible) as `RawGameController`.
+
+Another thing that I spent a lot of time on was the bug that was caused by how `RawGameController.RawGameControllers` behaves. It is actually well documented but AI does not know how it supposed to work and caused a massive headache for me. This Read-only collection is asynchronously updated by the Windows itself meaning that accessing it for the first time usually does not have information ready. I ended up create a loop to check it every 1 second for up to ten seconds to wait for it to be populated. A crude solution because there are other smarter way to do it, but I am happy with what I have because it works for me.
+
+### TO-DOs
+I want to add some unit tests and integration tests, though I do not want to deal with mocking OBS and Physical gamepad for the automated tests. I may or may not get to them.
+
+## License
+Please check the [LICENSE](./LICNESE) file for more details. Also check [THIRD_PARTY_NOTICES](./THIRD_PARTY_NOTICES) for the license related information regarding libraries that are used.
+
+## Contributions
+All contributions are welcome. Just follow the general coding style you can find in this project, then create a Pull Request. I will review them and decide what to do. If you do not want to waste time making changes then getting rejected, create an issue first to discuss potential the changes with me before commiting your time.
+
+
+
